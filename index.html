@@ -46,25 +46,25 @@
             <div class="search-bar col-md-6 mx-auto">
                 <h1 class="text-center">Lyrics Search</h1>
                 <div class="search-box my-5">
-                    <input type="text" class="form-control" placeholder="Enter your artist song name">
-                    <button class="btn btn-success search-btn">Search</button>
+                    <input id="search-input" type="text" class="form-control" placeholder="Enter your artist song name">
+                    <button id="search-button" class="btn btn-success search-btn">Search</button>
                 </div>
             </div>
             <!-- === Simple results === -->
-            <div class="d-flex justify-content-center">
-                <div class="">
-                    <p class="author lead"><strong>Purple Noon</strong> Album by <span>Washed Out</span> <button class="btn btn-success">Get Lyrics</button></p>
-                    <p class="author lead"><strong>Purple Noon</strong> Album by <span>Washed Out</span> <button class="btn btn-success">Get Lyrics</button></p>
-                    <p class="author lead"><strong>Purple Noon</strong> Album by <span>Washed Out</span> <button class="btn btn-success">Get Lyrics</button></p>
-                    <p class="author lead"><strong>Purple Noon</strong> Album by <span>Washed Out</span> <button class="btn btn-success">Get Lyrics</button></p>
-                    <p class="author lead"><strong>Purple Noon</strong> Album by <span>Washed Out</span> <button class="btn btn-success">Get Lyrics</button></p>
+            <div id="div" class="d-flex justify-content-center">
+                <div  class="text-center">
+                    <p id="info"></p>
+                    <!-- <p id="title-artist" class="author lead"><strong></strong> Album by <span id="span"></span> <button class="btn btn-success">Get Lyrics</button></p> -->
                 </div>
             </div>
             <!-- Single Lyrics -->
+            <pre id="lyrics-text">
+
+            </pre>
             <div class="single-lyrics text-center">
                 <button class="btn go-back">&lsaquo;</button>
                 <h2 class="text-success mb-4">Pentatonix - Na Na Na</h2>
-                <pre class="lyric text-white">
+                <pre class="lyric text-white text-success">
     Wont go whistling like the wind blows,
     Looking out my window,
     Just to see the shine
@@ -214,6 +214,7 @@
         </main>
     </div>
     <!-- Optional JavaScript -->
+    <script src="script.js"></script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
