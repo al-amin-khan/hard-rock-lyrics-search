@@ -26,6 +26,19 @@ function loadSuggest(input){
       `
       const finalText = document.getElementById('info').innerHTML += output;
 
+      const output2 = `
+      <div class="single-result row align-items-center my-3 p-3">
+          <div class="col-md-9">
+              <h3 class="lyrics-name">${title}</h3>
+              <p class="author lead">Album by <span>${artist}</span></p>
+          </div>
+          <div class="col-md-3 text-md-right text-center">
+              <button class="btn btn-success">Get Lyrics</button>
+          </div>
+      </div>
+      `;
+      document.getElementById('fancy-style').innerHTML += output2;
+
     }
   })
   document.getElementById('search-input').value = '';
