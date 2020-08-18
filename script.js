@@ -1,27 +1,25 @@
 // https://api.lyrics.ovh/suggest/
 // https://api.lyrics.ovh/v1/artist/title
 
+var searchInput;
+
 document.getElementById('search-button').addEventListener('click', function (){
-  const searchInput = document.getElementById('search-input').value;
-  // console.log(searchInput);
+  document.getElementById('info').innerHTML = '';
+  searchInput = document.getElementById('search-input').value;
   loadSuggest(searchInput);
+  loadLyrics(searchInput);
 });
 
 function loadSuggest(input){
-  let link = 'https://api.lyrics.ovh/suggest/'+input;
+  const link = 'https://api.lyrics.ovh/suggest/'+input;
   fetch(link)
   .then(response => response.json())
   .then(data => {
     const fetchData = data.data;
 
-    // const divTag = document.createElement('div');
-    // console.log(divTag);
-    for (let i = 0; i < fetchData.length; i++) {
+    for (let i = 0; i < 10; i++) {
       const title = fetchData[i].album.title;
       const artist = fetchData[i].artist.name;
-
-      // const para = document.createElement('p');
-      // const paraChild = divTag.appendChild(para);
 
       const output = `
       <p class="author lead"><strong>${title} </strong> Album by <span>${artist} </span> <button class="btn btn-success">Get Lyrics</button></p>
@@ -30,18 +28,44 @@ function loadSuggest(input){
 
     }
   })
+  document.getElementById('search-input').value = '';
 }
 
-function loadLyrics(artist, title){
-  const lyricsLink = 'https://api.lyrics.ovh/v1/'+artist+'/'+title;
+function loadLyrics(input){
+  const link = 'https://api.lyrics.ovh/suggest/'+input;
+  // let title;
+  // let artist;
+  // let lyricsLink;
 
-  fetch(lyricsLink)
+  fetch(link)
   .then(response => response.json())
   .then(data => {
-    document.getElementById('lyrics-text').innerHTML = data;
-    console.log(data);
+    const title = data.data[0].album.title;
+    const artist = data.data[0].artist.name;
+    const lyricsLink = 'https://api.lyrics.ovh/v1/'+artist+'/'+title;
+
+    document.getElementById('headline').innerHTML = `
+    ${artist} - ${title}
+    `;
+    fetch(lyricsLink)
+    .then(response => response.json())
+    .then(data => {
+      console.log(data.error);
+      if (data.error) {
+        document.getElementById('lyrics-text').innerHTML = `
+        <h4 class="text-center text-danger">${data.error}</h4>
+        `;
+      }
+      else {
+        document.getElementById('lyrics-text').innerHTML = data.lyrics;
+      }
+    })
+
+    .catch((error) => {
+      document.getElementById('lyrics-text').innerHTML = `
+      <h2 class="text-center text-danger">No Lyrics Found!</h2>
+      `;
+    });
   })
+
 }
-
-
-loadLyrics('Pentatonix', 'na na na');
