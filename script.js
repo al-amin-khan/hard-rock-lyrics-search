@@ -5,6 +5,7 @@ var searchInput;
 
 document.getElementById('search-button').addEventListener('click', function (){
   document.getElementById('info').innerHTML = '';
+  document.getElementById('fancy-style').innerHTML = '';
   searchInput = document.getElementById('search-input').value;
   loadSuggest(searchInput);
   loadLyrics(searchInput);
